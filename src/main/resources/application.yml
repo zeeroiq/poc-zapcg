@@ -11,10 +11,13 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
+#    database: POSTGRESQL #mysql
     database: mysql
+    show-sql: true
     properties:
       hibernate:
         diaect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
 # disable batch auto start
   batch:
     job:
