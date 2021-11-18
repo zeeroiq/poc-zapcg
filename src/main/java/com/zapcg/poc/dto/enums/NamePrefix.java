@@ -4,7 +4,7 @@ public enum NamePrefix {
     Mr,
     Ms,
     Mrs,
-    Hons,
+    Hon,
     Dr,
     Drs,
     Prof

@@ -4,9 +4,8 @@ import com.zapcg.poc.dto.enums.Gender;
 import com.zapcg.poc.dto.enums.NamePrefix;
 import com.zapcg.poc.dto.enums.Region;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.sql.Date;
 
 @Data
@@ -14,9 +13,11 @@ import java.sql.Date;
 public class Employee {
     @Id
     private Integer empId;
+    @Enumerated(EnumType.STRING)
     private NamePrefix prefix;
     private String firstName;
     private String lastName;
+    @Enumerated(EnumType.STRING)
     private Gender gender;
     private String email;
     private String fatherName;
@@ -30,6 +31,7 @@ public class Employee {
     private String country;
     private String state;
     private String zip;
+    @Enumerated(EnumType.STRING)
     private Region region;
     private String username;
     private String password;
