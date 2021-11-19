@@ -4,6 +4,7 @@ import com.zapcg.poc.dto.EmployeeDTO;
 import com.zapcg.poc.mapper.EmployeeFileRowMapper;
 import com.zapcg.poc.model.Employee;
 import com.zapcg.poc.processor.EmployeeProcessor;
+import com.zapcg.poc.writer.EmployeeDbWriter;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
@@ -28,6 +29,7 @@ public class DataDumpJob {
     private StepBuilderFactory stepBuilderFactory;
     private EmployeeProcessor employeeProcessor;
     private DataSource dataSource;
+    @Autowired private EmployeeDbWriter empWriter;
     private final String QUERY_INSERT_EMPLOYEE = "INSERT INTO " +
             "employee(" +
             "emp_Id, prefix, first_name, last_name, " +
@@ -66,7 +68,8 @@ public class DataDumpJob {
                 .<EmployeeDTO, Employee>chunk(10)
                 .reader(employeeCSVReader())
                 .processor(employeeProcessor)
-                .writer(employeeDBWriter())
+                .writer(empWriter)
+//                .writer(employeeDBWriter())
                 .build();
     }
 
