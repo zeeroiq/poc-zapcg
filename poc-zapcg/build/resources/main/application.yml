@@ -1,0 +1,32 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/poc?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: poc_user
+    password: password
+  # Spring Data hangs when not set under Spring Boot 2.3.0
+  data:
+    jpa:
+      repositories:
+        bootstrap-mode: default
+  jpa:
+    hibernate:
+      ddl-auto: create
+#    database: POSTGRESQL #mysql
+    database: mysql
+    show-sql: true
+    properties:
+      hibernate:
+        diaect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+# disable batch auto start
+  batch:
+    job:
+      enabled: false
+# database
+    initialize-schema: always
+
+# kafka properties
+  kafka:
+    consumer:
+      auto-offset-reset: earliest
+      group-id: spring_batch
