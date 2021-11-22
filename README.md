@@ -1,5 +1,5 @@
 # poc-zapcg
 Services:
 
-> poc-zapcg
-> poc-zapcg-consumer
+1. poc-zapcg
+2. poc-zapcg-consumer
