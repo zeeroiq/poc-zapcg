@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Slf4j
-@Component
+//@Component
 public class EmployeeDbWriter implements ItemWriter<Employee> {
     @Autowired
     private EmployeeRepo employeeRepo;
