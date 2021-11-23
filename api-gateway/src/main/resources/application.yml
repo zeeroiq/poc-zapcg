@@ -3,7 +3,12 @@ server:
 spring:
   application:
     name: api-gateway
+# set this otherwise gateway will fail to start and throw exception for Spring MVC found on classpath, which is incompatible with Spring Cloud Gateway.
+  main:
+    web-application-type: reactive
 
 eureka:
   client:
     register-with-eureka: false
+    service-url:
+      defaultZone: http://netflix:eureka@localhost:8761/eureka
