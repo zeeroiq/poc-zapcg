@@ -1,4 +1,8 @@
+server:
+  port: 8080
 spring:
+  application:
+    name: data-dump-service
 # disable batch auto start
   batch:
     job:
