@@ -1,0 +1,9 @@
+server:
+  port: 8989
+spring:
+  application:
+    name: api-gateway
+
+eureka:
+  client:
+    register-with-eureka: false
