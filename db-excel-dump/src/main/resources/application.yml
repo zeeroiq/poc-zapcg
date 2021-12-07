@@ -1,0 +1,21 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: db-excel-dump-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/poc?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: poc_user
+    password: password
+  # Spring Data hangs when not set under Spring Boot 2.3.0
+  data:
+    jpa:
+      repositories:
+        bootstrap-mode: default
+  jpa:
+    hibernate:
+      ddl-auto: create
+    database: mysql
+    properties:
+      hibernate:
+        diaect: org.hibernate.dialect.MySQL8Dialect
