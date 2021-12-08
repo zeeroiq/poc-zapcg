@@ -13,8 +13,9 @@ spring:
       repositories:
         bootstrap-mode: default
   jpa:
+    show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
     database: mysql
     properties:
       hibernate:

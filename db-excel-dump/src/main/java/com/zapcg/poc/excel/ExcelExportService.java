@@ -1,6 +1,7 @@
 package com.zapcg.poc.excel;
 
 import com.zapcg.poc.model.Employee;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
@@ -16,6 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Slf4j
 public class ExcelExportService {
 
     private XSSFWorkbook workbook;
@@ -45,6 +47,7 @@ public class ExcelExportService {
 
     public ExcelExportService(List<Employee> employeeList) {
         this.employeeList = employeeList;
+        this.workbook = new XSSFWorkbook();
     }
 
     private void writeHeaderLine() {
@@ -53,7 +56,7 @@ public class ExcelExportService {
         CellStyle style = workbook.createCellStyle();
         Font font = workbook.createFont();
         font.setBold(true);
-        font.setFontHeight((short) 16);
+        font.setFontHeightInPoints((short) 14);
         style.setFont(font);
 
         createCell(row, cellValue, style);
@@ -85,6 +88,8 @@ public class ExcelExportService {
         Cell cell = row.createCell(columnCount);
         if (value instanceof Integer) {
             cell.setCellValue((Integer) value);
+        } else if (value instanceof Double) {
+            cell.setCellValue((Double) value);
         } else if (value instanceof Boolean) {
             cell.setCellValue((Boolean) value);
         } else if (value instanceof Date) {
@@ -100,17 +105,17 @@ public class ExcelExportService {
         int rowCount = 1;
         CellStyle cellStyle = workbook.createCellStyle();
         Font font = workbook.createFont();
-        font.setFontHeight((short) 14);
+        font.setFontHeightInPoints((short) 11);
         cellStyle.setFont(font);
 
         for (Employee employee : employeeList) {
             Row row = sheet.createRow(rowCount++);
             int columnCount = 0;
             createCell(row, columnCount++, employee.getEmpId(), cellStyle);
-            createCell(row, columnCount++, employee.getPrefix(), cellStyle);
+            createCell(row, columnCount++, employee.getPrefix().name(), cellStyle);
             createCell(row, columnCount++, employee.getFirstName(), cellStyle);
             createCell(row, columnCount++, employee.getLastName(), cellStyle);
-            createCell(row, columnCount++, employee.getGender(), cellStyle);
+            createCell(row, columnCount++, employee.getGender().name(), cellStyle);
             createCell(row, columnCount++, employee.getEmail(), cellStyle);
             createCell(row, columnCount++, employee.getFirstName(), cellStyle);
             createCell(row, columnCount++, employee.getMotherName(), cellStyle);
@@ -123,9 +128,10 @@ public class ExcelExportService {
             createCell(row, columnCount++, employee.getCountry(), cellStyle);
             createCell(row, columnCount++, employee.getState(), cellStyle);
             createCell(row, columnCount++, employee.getZip(), cellStyle);
-            createCell(row, columnCount++, employee.getRegion(), cellStyle);
+            createCell(row, columnCount++, employee.getRegion().name(), cellStyle);
             createCell(row, columnCount++, employee.getUsername(), cellStyle);
             createCell(row, columnCount++, employee.getPassword(), cellStyle);
+            log.info(">>>>> Row-" + rowCount + " added for: " + employee);
         }
     }
 

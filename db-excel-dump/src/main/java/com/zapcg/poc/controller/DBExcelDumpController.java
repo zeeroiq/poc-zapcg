@@ -3,6 +3,7 @@ package com.zapcg.poc.controller;
 import com.zapcg.poc.excel.ExcelExportService;
 import com.zapcg.poc.model.Employee;
 import com.zapcg.poc.service.EmployeeDBService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/v1/export")
 public class DBExcelDumpController {
@@ -38,5 +40,6 @@ public class DBExcelDumpController {
         ExcelExportService excelExporter = new ExcelExportService(listUsers);
 
         excelExporter.export(response);
+        log.debug(">>>>> No of records dumped: " + listUsers.size());
     }
 }
