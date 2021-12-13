@@ -25,7 +25,7 @@ public class EmployeeController {
     @GetMapping(value = "/employees/", params = {"page", "size", "sortBy"})
     private ResponseEntity<List<Employee>> getPaginatedList(@RequestParam(defaultValue = "0") Integer page,
                                                            @RequestParam(defaultValue = "10") Integer size,
-                                                           @RequestParam(defaultValue = "id") String sortBy) {
+                                                           @RequestParam(defaultValue = "emp_id") String sortBy) {
         List<Employee> employees = employeeService.listAllEmployees(page, size, sortBy);
         return new ResponseEntity<>(employees, new HttpHeaders(), HttpStatus.OK);
     }
